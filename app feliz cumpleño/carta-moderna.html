@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Carta de Cumpleaños Especial</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Cumpleaños">
+    <meta name="application-name" content="Carta de Cumpleaños">
+    <meta name="msapplication-TileColor" content="#667eea">
+    <meta name="msapplication-config" content="./browserconfig.xml">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="./manifest.json">
+    
+    <!-- Apple Icons -->
+    <link rel="apple-touch-icon" sizes="72x72" href="./icon-72.png">
+    <link rel="apple-touch-icon" sizes="96x96" href="./icon-96.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="./icon-128.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./icon-144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./icon-152.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="./icon-192.png">
+    <link rel="apple-touch-icon" sizes="384x384" href="./icon-384.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="./icon-512.png">
+    
+    <!-- Standard Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./icon-16.png">
+    <link rel="shortcut icon" href="./favicon.ico">
+    
+    <!-- Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registrado:', registration);
+                    })
+                    .catch(error => {
+                        console.log('Error en Service Worker:', error);
+                    });
+            });
+        }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles-moderna.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <div class="welcome-screen" id="welcomeScreen">
+            <div class="welcome-content">
+                <div class="birthday-icon">🎉</div>
+                <h1 class="welcome-title">Feliz Cumpleaños</h1>
+                <p class="welcome-subtitle">Tienes un mensaje especial</p>
+                <button class="start-btn" onclick="startExperience()">Abrir Mensaje ✨</button>
+            </div>
+        </div>
+        
+        <div class="message-screen" id="messageScreen">
+            <div class="message-container">
+                <div class="message-header">
+                    <div class="age-badge">18 AÑOS</div>
+                    <h2 class="greeting">¡Feliz Cumpleaños!</h2>
+                </div>
+                
+                <div class="message-content">
+                    <div class="message-block highlight">
+                        <p>Hace 18 años nació alguien que tiene la capacidad de hacer que todo sea más bonito con solo existir.</p>
+                    </div>
+                    
+                    <div class="message-block">
+                        <p>Quería escribirte algo que pudieras guardar no solo en tu teléfono, sino en un rinconcito de tu corazón. Porque personas como tú, que escuchan con el alma y entienden con el corazón, no se encuentran dos veces en la vida, solo existe un solo tú y estoy muy agradecida con la vida por permitirme conocerte.</p>
+                    </div>
+                    
+                    <div class="message-block gratitude">
+                        <p>Gracias por la amabilidad con la que tratas a los que te rodean, por tu luz que brilla más que el sol, y por ser ese lugar seguro al que siempre quiero volver. Mi deseo para ti en este nuevo año de vida es que la vida te devuelva, al menos, un poquito de todo el esfuerzo que haces.</p>
+                    </div>
+                    
+                    <div class="message-block wishes">
+                        <p>Que nunca te falten motivos para sonreír, sueños por cumplir y momentos que te hagan sentir lo especial y amado que eres.</p>
+                    </div>
+                    
+                    <div class="message-block closing">
+                        <p>Espero estar a tu lado los años que vienen para seguir sacándote sonrisas y sigas iluminando mis días.</p>
+                    </div>
+                </div>
+                
+                <div class="message-footer">
+                    <div class="signature">
+                        <p>Con todo mi amor,</p>
+                        <p class="signature-name">Tu amigo especial</p>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="action-btn music" onclick="toggleMusic()">
+                        <span class="icon">🎵</span>
+                        <span class="text">Música</span>
+                    </button>
+                    <button class="action-btn playlist" onclick="togglePlaylist()">
+                        <span class="icon">📋</span>
+                        <span class="text">Playlist</span>
+                    </button>
+                    <button class="action-btn prev" onclick="previousSong()">
+                        <span class="icon">⏮️</span>
+                        <span class="text">Anterior</span>
+                    </button>
+                    <button class="action-btn next" onclick="nextSong()">
+                        <span class="icon">⏭️</span>
+                        <span class="text">Siguiente</span>
+                    </button>
+                    <button class="action-btn celebrate" onclick="celebrate()">
+                        <span class="icon">🎊</span>
+                        <span class="text">Celebrar</span>
+                    </button>
+                    <button class="action-btn back" onclick="backToWelcome()">
+                        <span class="icon">🏠</span>
+                        <span class="text">Inicio</span>
+                    </button>
+                </div>
+                
+                <!-- Playlist Modal -->
+                <div class="playlist-modal" id="playlistModal">
+                    <div class="playlist-content">
+                        <div class="playlist-header">
+                            <h3>🎵 Mi Playlist</h3>
+                            <button class="close-btn" onclick="togglePlaylist()">❌</button>
+                        </div>
+                        <div class="playlist-songs" id="playlistSongs"></div>
+                        <div class="playlist-controls">
+                            <button class="control-btn" onclick="moveSongUp()">⬆️ Subir</button>
+                            <button class="control-btn" onclick="moveSongDown()">⬇️ Bajar</button>
+                            <button class="control-btn" onclick="shufflePlaylist()">🔀 Mezclar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="floating-elements">
+        <div class="floating-element">🎂</div>
+        <div class="floating-element">🎈</div>
+        <div class="floating-element">🎁</div>
+        <div class="floating-element">✨</div>
+        <div class="floating-element">🌟</div>
+    </div>
+    
+    <div class="confetti-overlay" id="confettiOverlay"></div>
+    
+    <script src="script-moderna.js"></script>
+</body>
+</html>
