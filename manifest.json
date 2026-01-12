@@ -2,7 +2,7 @@
   "name": "Carta de Feliz Cumpleaños",
   "short_name": "Feliz Cumple",
   "description": "Una carta especial y moderna de feliz cumpleaños",
-  "start_url": "/carta-de-feliz-cumplea-os/",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ff0000",
@@ -19,3 +19,4 @@
     }
   ]
 }
+
